@@ -1,0 +1,788 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #ffffff;
+    --primary: #25D366;
+    /* WhatsApp Greenish */
+    --accent: #00E5FF;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+}
+
+/* Typography & Utilities */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+}
+
+.highlight {
+    color: var(--primary);
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Classes */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+}
+
+.glass-card {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+    padding: 3rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.nav-links a {
+    color: #ccc;
+    text-decoration: none;
+    margin-left: 2rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #fff;
+}
+
+.nav-links .btn-primary {
+    color: #000;
+    margin-left: 2rem;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), #128C7E);
+    color: #000;
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 1rem;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.hero .content {
+    max-width: 800px;
+    animation: fadeIn 1s ease-out;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.badge {
+    background: rgba(37, 211, 102, 0.1);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    border: 1px solid rgba(37, 211, 102, 0.2);
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 2rem;
+}
+
+.stats h3 {
+    font-size: 2rem;
+    color: var(--text-color);
+}
+
+.stats p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Services */
+.services {
+    padding: 6rem 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    padding: 2.5rem;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.card p {
+    color: #999;
+    line-height: 1.5;
+}
+
+/* --- SECCIÓN: ¿POR QUÉ SOMOS DIFERENTES? --- */
+.diferencia-section {
+    padding: 6rem 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.diferencia-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.diferencia-header {
+    text-align: center;
+}
+
+.diferencia-badge {
+    display: inline-block;
+    background: rgba(255, 77, 77, 0.15);
+    color: #ff6b6b;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255, 77, 77, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+.diferencia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.diferencia-card {
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.diferencia-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.diferencia-card:hover::before {
+    transform: scaleX(1);
+}
+
+.diferencia-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.15);
+}
+
+.diferencia-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.diferencia-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #fff;
+}
+
+.diferencia-card p {
+    color: #aaa;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Caja del problema */
+.problema-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 3rem;
+    border: 1px solid rgba(255, 200, 100, 0.2);
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(255, 150, 50, 0.05));
+}
+
+.problema-content {
+    flex: 1;
+    min-width: 300px;
+}
+
+.problema-content h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.problema-content p {
+    color: #bbb;
+    line-height: 1.6;
+    margin-bottom: 0.8rem;
+}
+
+.problema-content .solucion {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.problema-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.problema-cta .btn-primary {
+    font-size: 1.1rem;
+    padding: 15px 35px;
+    white-space: nowrap;
+}
+
+.cta-subtext {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* Footer */
+.glass-footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    border-top: 1px solid var(--glass-border);
+    color: #666;
+}
+
+/* Responsive */
+/* Hamburger Menu Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger Animation when active */
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .navbar {
+        width: 100%;
+        top: 0;
+        border-radius: 0;
+        padding: 1rem;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background: rgba(5, 5, 5, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        transition: right 0.4s ease;
+        border-left: 1px solid var(--glass-border);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.3rem;
+        margin: 0;
+    }
+
+    .nav-links .btn-primary {
+        margin: 0;
+        margin-top: 1rem;
+    }
+
+    .stats {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- DEMO SECTION --- */
+.demo-section {
+    padding: 6rem 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.demo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    padding: 3rem;
+    flex-wrap: wrap;
+}
+
+/* Phone Mockup */
+.phone-mockup {
+    width: 300px;
+    height: 580px;
+    background: #000;
+    border-radius: 40px;
+    border: 8px solid #333;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.phone-header {
+    background: #075E54;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+}
+
+.phone-header .avatar {
+    width: 40px;
+    height: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.phone-header .contact-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.phone-header .name {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.phone-header .status {
+    font-size: 0.75rem;
+    opacity: 0.8;
+}
+
+.chat-screen {
+    background-color: rgba(13, 20, 24, 0.9);
+    /* WhatsApp Dark Mode Bg with opacity */
+    height: calc(100% - 70px);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');
+    /* WA Doodle */
+    background-blend-mode: overlay;
+}
+
+.message {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    position: relative;
+}
+
+.message.received {
+    background: #202c33;
+    color: #fff;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+}
+
+.message.sent {
+    background: #005c4b;
+    color: #fff;
+    align-self: flex-end;
+    border-top-right-radius: 0;
+}
+
+.demo-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.demo-text h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--accent);
+}
+
+.demo-text ul {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.demo-text li {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sandbox-info {
+    font-size: 0.9rem;
+    color: #ffcc00;
+    margin-top: 10px;
+}
+
+/* --- CONTACT SECTION --- */
+.contact-section {
+    padding: 6rem 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.contact-card {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid var(--primary);
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.1);
+}
+
+.contact-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.price-tag {
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 2rem 0;
+}
+
+.price-tag .currency {
+    font-size: 2rem;
+    vertical-align: super;
+}
+
+.price-tag .period {
+    font-size: 1rem;
+    color: #888;
+    font-weight: 400;
+}
+
+.large-btn {
+    font-size: 1.2rem;
+    padding: 15px 40px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.discount-text {
+    color: #25D366;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.guarantee {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+/* --- FLOATING WHATSAPP BUTTON --- */
+.floating-wa {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transition: transform 0.3s;
+}
+
+.floating-wa:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-icon {
+    width: 35px;
+    height: 35px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .demo-container {
+        flex-direction: column;
+        padding: 1.5rem;
+        gap: 2rem;
+    }
+
+    .phone-mockup {
+        width: 100%;
+        max-width: 300px;
+        height: 500px;
+    }
+
+    .demo-text {
+        text-align: center;
+    }
+
+    .demo-text ul {
+        text-align: left;
+        display: inline-block;
+    }
+
+    /* Sección Diferencia - Mobile */
+    .diferencia-section {
+        padding: 4rem 15px;
+    }
+
+    .diferencia-badge {
+        font-size: 0.95rem;
+        padding: 8px 18px;
+    }
+
+    .diferencia-header .section-title {
+        font-size: 1.8rem;
+    }
+
+    .diferencia-card {
+        padding: 1.5rem;
+    }
+
+    .diferencia-icon {
+        font-size: 2.5rem;
+    }
+
+    .problema-box {
+        flex-direction: column;
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .problema-content {
+        min-width: auto;
+    }
+
+    .problema-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .problema-cta {
+        width: 100%;
+    }
+
+    .problema-cta .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}
